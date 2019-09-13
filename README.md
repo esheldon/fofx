@@ -9,6 +9,15 @@ import fitsio
 
 seg = fitsio.read(seg_map_file)
 fofs = fofx.get_fofs(seg)
+
+for i in range(fofs.size):
+    print(fofs['fof_id'][i], fofs['number'][i])
+
+# for the seg map presented below this outputs
+0      1
+0      2
+0      3
+1      4
 ```
 
 If the seg map looked like this then three objects would be grouped and one

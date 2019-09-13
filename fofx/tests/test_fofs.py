@@ -25,7 +25,7 @@ def test_fofs_smoke():
     """
 
     seg = get_fake_seg()
-    fofs = fofx.get_fofs(seg)
+    fofx.get_fofs(seg)
 
 
 def test_fofs():

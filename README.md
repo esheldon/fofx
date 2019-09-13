@@ -16,6 +16,29 @@ would not
 
 ![Sample Png](https://raw.githubusercontent.com/esheldon/fofx/master/data/seg.png)
 
+In particular if the ids were as follows
+```
+    0 0 0 0 0 0 0 0 0 0 0 0 0
+    0 1 1 1 0 0 0 0 0 0 0 0 0
+    0 1 1 1 0 0 0 0 0 3 0 0 0
+    0 1 1 2 2 2 0 0 3 3 3 0 0
+    0 0 2 2 2 2 2 3 3 3 3 3 0
+    0 2 2 2 2 0 0 0 0 3 3 0 0
+    0 0 2 2 2 0 0 0 0 0 0 0 0
+    0 0 0 2 0 0 0 0 4 4 0 0 0
+    0 0 0 0 0 0 0 0 4 4 4 0 0
+    0 0 0 0 0 0 0 0 4 4 4 0 0
+    0 0 0 0 0 0 0 0 0 0 0 0 0
+```
+then the output of the get_fofs command would have the following structure
+```
+fof_id number
+0      1
+0      2
+0      3
+1      4
+```
+
 
 ## Requirements
 - numpy

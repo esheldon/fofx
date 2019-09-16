@@ -1,6 +1,5 @@
 import numpy as np
 import fofx
-# import pytest
 
 
 def get_fake_seg():
@@ -19,7 +18,7 @@ def get_fake_seg():
     ])
 
 
-def test_fofs_smoke():
+def test_fofs_smoke(show=False):
     """
     test we can run end to end
     """
@@ -27,8 +26,11 @@ def test_fofs_smoke():
     seg = get_fake_seg()
     fofx.get_fofs(seg)
 
+    if show:
+        fofx.plot_seg(seg, show=True)
 
-def test_fofs():
+
+def test_fofs(show=False):
     """
     test we can run end to end
     """

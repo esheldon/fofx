@@ -3,6 +3,38 @@ from numba import njit
 import copy
 
 
+def add_fofs_to_cat(cat, fofs):
+    """
+    add fof information to the input catalog
+
+    Parameters
+    ----------
+    cat: array with fields
+        Must have the 'number' field for matching to the fofs
+    fofs: array with fields
+        Must have 'fof_id' and 'number' fields
+
+    Returns
+    -------
+    new_cat:
+        Catalog with 'fof_id' added
+    """
+
+    import esutil as eu
+
+    if 'fof_id' not in cat.dtype.names:
+        catold = cat
+        add_dt = [('fof_id', 'i4')]
+        cat = eu.numpy_util.add_fields(catold, add_dt)
+
+    mcat, mfofs = eu.numpy_util.match(cat['number'], fofs['number'])
+    if mcat.size != cat.size:
+        raise ValueError('some did not match')
+    cat['fof_id'][mcat] = fofs['fof_id'][mfofs]
+
+    return cat
+
+
 def get_fofs(seg):
     """
     group any objects whose seg maps touch

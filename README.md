@@ -52,3 +52,4 @@ fof_id number
 ## Requirements
 - numpy
 - numba
+- biggles, optional images for visualization

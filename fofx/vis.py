@@ -1,4 +1,5 @@
 import numpy as np
+from numba import njit
 
 
 def plot_seg(segin, width=1000, rng=None, show=False, **kw):
@@ -12,22 +13,18 @@ def plot_seg(segin, width=1000, rng=None, show=False, **kw):
 
     seg = np.transpose(segin)
 
-    cseg = np.zeros((seg.shape[0], seg.shape[1], 3))
-
-    useg = np.unique(seg)[1:]
+    max_seg = seg.max()
 
     low = 50/255
     high = 255/255
+    n = max_seg*3
+    colors = rng.uniform(low=low, high=high, size=n).reshape(
+        (max_seg, 3),
+    )
 
-    for i, segval in enumerate(useg):
+    cseg = np.zeros((seg.shape[0], seg.shape[1], 3))
 
-        w = np.where(seg == segval)
-
-        r, g, b = rng.uniform(low=low, high=high, size=3)
-
-        cseg[w[0], w[1], 0] = r
-        cseg[w[0], w[1], 1] = g
-        cseg[w[0], w[1], 2] = b
+    _make_color_seg(seg, cseg, colors)
 
     plt = images.view(cseg, show=False, **kw)
 
@@ -36,3 +33,17 @@ def plot_seg(segin, width=1000, rng=None, show=False, **kw):
         plt.show(width=width, height=width*srat)
 
     return plt
+
+
+@njit
+def _make_color_seg(seg, cseg, colors):
+    nrow, ncol = seg.shape
+    for row in range(nrow):
+        for col in range(ncol):
+
+            val = seg[row, col]
+            if val > 0:
+                r, g, b = colors[val]
+                cseg[row, col, 0] = r
+                cseg[row, col, 1] = g
+                cseg[row, col, 2] = b

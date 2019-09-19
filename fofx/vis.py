@@ -22,7 +22,7 @@ def plot_seg(segin, width=1000, rng=None, show=False, **kw):
         (max_seg, 3),
     )
 
-    cseg = np.zeros((seg.shape[0], seg.shape[1], 3))
+    cseg = np.zeros((seg.shape[0], seg.shape[1], 3), dtype='f4')
 
     _make_color_seg(seg, cseg, colors)
 

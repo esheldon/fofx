@@ -31,9 +31,6 @@ def add_fofs_to_cat(cat, fofs):
         cat = eu.numpy_util.add_fields(catold, add_dt)
 
     mcat, mfofs = eu.numpy_util.match(cat['number'], fofs['number'])
-    print('cat size:', cat.size)
-    print('fofs size:', fofs.size)
-    print('match size:', mcat.size)
 
     if mcat.size != cat.size:
         raise ValueError('some did not match')

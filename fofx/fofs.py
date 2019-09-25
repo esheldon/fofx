@@ -5,7 +5,10 @@ import copy
 
 def add_fofs_to_cat(cat, fofs):
     """
-    add fof information to the input catalog
+    add fof information to the input catalog.
+
+    Note there are cases where an entry appears in the catalog but not in the
+    seg map.  In that case we add extra groups
 
     Parameters
     ----------
@@ -28,6 +31,10 @@ def add_fofs_to_cat(cat, fofs):
         cat = eu.numpy_util.add_fields(catold, add_dt)
 
     mcat, mfofs = eu.numpy_util.match(cat['number'], fofs['number'])
+    print('cat size:', cat.size)
+    print('fofs size:', fofs.size)
+    print('match size:', mcat.size)
+
     if mcat.size != cat.size:
         raise ValueError('some did not match')
     cat['fof_id'][mcat] = fofs['fof_id'][mfofs]
@@ -56,9 +63,15 @@ def get_fofs(seg):
 
     dtype = [('number', 'i4'), ('nbr_number', 'i4')]
 
-    pairs_singleton = np.zeros(useg.size, dtype=dtype)
-    pairs_singleton['number'] = useg
-    pairs_singleton['nbr_number'] = useg
+    # do range to partially avoid bug where objects are in catalog but not the
+    # seg map. Won't help if N is a missing entry
+
+    num_max = useg.max()
+    numbers = np.arange(1, num_max+1)
+
+    pairs_singleton = np.zeros(numbers.size, dtype=dtype)
+    pairs_singleton['number'] = numbers
+    pairs_singleton['nbr_number'] = numbers
 
     pairs = np.zeros(seg.size, dtype=dtype)
     pairs['number'] = -1

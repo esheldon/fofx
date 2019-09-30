@@ -17,9 +17,9 @@ def plot_seg(segin, width=1000, rng=None, show=False, **kw):
 
     low = 50/255
     high = 255/255
-    n = max_seg*3
+    n = (max_seg+1)*3
     colors = rng.uniform(low=low, high=high, size=n).reshape(
-        (max_seg, 3),
+        (max_seg+1, 3),
     )
 
     cseg = np.zeros((seg.shape[0], seg.shape[1], 3), dtype='f4')

@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='fofx',
-    version='v0.1.0',
+    version='v0.9.0',
     description=('Friends of friends group finding using '
                  'sextractor segmentation maps'),
     license='GPL',

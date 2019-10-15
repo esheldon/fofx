@@ -258,6 +258,6 @@ def _get_unique_pairs(pairs):
     1_000_000
     """
 
-    tid = pairs['number']*1_000_000 + pairs['nbr_number']
+    tid = pairs['number']*1000000 + pairs['nbr_number']
     uid, uid_index = np.unique(tid, return_index=True)
     return pairs[uid_index]

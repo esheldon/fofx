@@ -6,10 +6,12 @@ def plot_seg(segin, width=1000, rng=None, show=False, **kw):
     """
     plot the seg map with randomized colors for better display
     """
-    import images
+    import matplotlib.pyplot as mplt
 
     if rng is None:
         rng = np.random.RandomState()
+
+    fig, ax = mplt.subplots()
 
     seg = np.transpose(segin)
 
@@ -26,13 +28,12 @@ def plot_seg(segin, width=1000, rng=None, show=False, **kw):
 
     _make_color_seg(seg, cseg, colors)
 
-    plt = images.view(cseg, show=False, **kw)
+    ax.imshow(cseg, **kw)
 
     if show:
-        srat = seg.shape[1]/seg.shape[0]
-        plt.show(width=width, height=width*srat)
+        mplt.show()
 
-    return plt
+    return fig, ax
 
 
 @njit

@@ -48,3 +48,10 @@ def test_fofs(show=False):
 
     assert w0.size == 3
     assert w1.size == 1
+
+    if show:
+        fofx.plot_seg(seg, show=True)
+
+
+if __name__ == '__main__':
+    test_fofs(show=True)

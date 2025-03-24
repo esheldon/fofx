@@ -2,7 +2,7 @@ import numpy as np
 from numba import njit
 
 
-def plot_seg(segin, width=1000, rng=None, show=False, **kw):
+def plot_seg(seg, rng=None, show=False, **kw):
     """
     plot the seg map with randomized colors for better display
     """
@@ -12,8 +12,6 @@ def plot_seg(segin, width=1000, rng=None, show=False, **kw):
         rng = np.random.RandomState()
 
     fig, ax = mplt.subplots()
-
-    seg = np.transpose(segin)
 
     max_seg = seg.max()
 
